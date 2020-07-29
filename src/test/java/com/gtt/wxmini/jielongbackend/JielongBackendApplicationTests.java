@@ -1,4 +1,4 @@
-package com.cygtech.wxmini.jielongbackend;
+package com.gtt.wxmini.jielongbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.cygtech.wxmini.jielongbackend;
+package com.gtt.wxmini.jielongbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.cygtech.wxmini.jielongbackend;
+package com.gtt.wxmini.jielongbackend;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
