@@ -6,8 +6,8 @@ import com.gtt.wxmini.jielongbackend.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -23,40 +23,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void removeProduct(Product product) throws ExecutionException, InterruptedException {
+    public Optional<Product> findProductById(long productId) {
 
-        productRepository.delete(product);
+        return productRepository.findById(productId);
     }
 
     @Override
-    public List<Product> findAllByProductName(String productName) {
+    public void removeProductById(long id) throws ExecutionException, InterruptedException {
 
-        return productRepository.findAllByProductName(productName);
-    }
-
-    //Id problem
-    @Override
-    public Iterable<Product> findAllByProductId(long productId) {
-
-        return productRepository.findAllById(Collections.singleton(productId));
+        productRepository.deleteById(id);
     }
 
     @Override
-    public List<Product> findAllByProductPrice(double productPrice) {
-
-        return productRepository.findAllByProductPrice(productPrice);
-    }
-
-    @Override
-    public void removeAllByProductName(String productName) throws ExecutionException, InterruptedException {
-
-        productRepository.deleteAll(this.findAllByProductName(productName));
-    }
-
-    @Override
-    public void removeAllByProductId(long id) throws ExecutionException, InterruptedException {
-
-        productRepository.deleteAll(this.findAllByProductId(id));
+    public void removeAllProducts() {
+        
+        productRepository.deleteAll();
     }
 
     //Only findAll

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -17,6 +18,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    //addProduct
     @PostMapping(value = "")
     public ResponseEntity<String> addProduct(@RequestBody Product product) {
 
@@ -28,69 +30,39 @@ public class ProductController {
         }
     }
 
+    //removeProductById
     @DeleteMapping(value = "")
-    public ResponseEntity<String> removeProduct(@RequestBody Product product) {
+    public ResponseEntity<String> removeProductById(@PathVariable long productId) {
 
         try {
-            productService.removeProduct(product);
+            productService.removeProductById(productId);
             return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping(value = "/{productName}")
-    public ResponseEntity<Collection<Product>> getAllProductsByName(@PathVariable String productName) {
-
-        try {
-            Collection<Product> resultBody = productService.findAllByProductName(productName);
-            return new ResponseEntity<>(resultBody, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
-
+    //findProductById
     @GetMapping(value = "/{productId}")
-    public ResponseEntity<Iterable<Product>> getAllProductsById(@PathVariable long productId) {
+    public ResponseEntity<Optional<Product>> getAllProductsById(@PathVariable long productId) {
 
         try {
-            Iterable<Product> resultBody = productService.findAllByProductId(productId);
+            Optional<Product> resultBody = productService.findProductById(productId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping(value = "/{productPrice}")
-    public ResponseEntity<Collection<Product>> getAllProductsByPrice(@PathVariable double productPrice) {
-
-        try {
-            Collection<Product> resultBody = productService.findAllByProductPrice(productPrice);
-            return new ResponseEntity<>(resultBody, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping(value = "/{productName}")
-    public ResponseEntity<String> removeAllProductByName(@PathVariable String productName) {
-
-        try {
-            productService.removeAllByProductName(productName);
-            return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
-        } catch (InterruptedException | ExecutionException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
+    //removeAllProduct
     @DeleteMapping(value = "/{productId}")
     public ResponseEntity<String> removeAllProductById(@PathVariable long productId) {
 
         try {
-            productService.removeAllByProductId(productId);
+            productService.removeAllProducts();
             return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
-        } catch (InterruptedException | ExecutionException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
