@@ -34,12 +34,4 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
-    @Override
-    public void removeAllProducts() {
-        
-        productRepository.deleteAll();
-    }
-
-    //Only findAll
-
 }

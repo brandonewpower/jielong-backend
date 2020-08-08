@@ -1,7 +1,7 @@
 package com.gtt.wxmini.jielongbackend.controllers;
 
-import com.gtt.wxmini.jielongbackend.models.Product;
-import com.gtt.wxmini.jielongbackend.services.ProductService;
+import com.gtt.wxmini.jielongbackend.models.Jielong;
+import com.gtt.wxmini.jielongbackend.services.JielongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,41 +12,41 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping(value = "")
-public class ProductController {
+public class JielongController {
 
     @Autowired
-    private ProductService productService;
+    private JielongService jielongService;
 
-    //addProduct
+    //addRequest
     @PostMapping(value = "")
-    public ResponseEntity<String> addProduct(@RequestBody Product product) {
+    public ResponseEntity<String> addRequest(@RequestBody Jielong jielong) {
 
         try {
-            productService.addProduct(product);
-            return new ResponseEntity<>("Product added successfully.", HttpStatus.CREATED);
+            jielongService.addRequest(jielong);
+            return new ResponseEntity<>("Request added successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    //removeProductById
+    //removeRequestById
     @DeleteMapping(value = "")
-    public ResponseEntity<String> removeProductById(@PathVariable long productId) {
+    public ResponseEntity<String> removeRequestById(@PathVariable long requestId) {
 
         try {
-            productService.removeProductById(productId);
+            jielongService.removeRequestById(requestId);
             return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    //findProductById
-    @GetMapping(value = "/{productId}")
-    public ResponseEntity<Optional<Product>> getAllProductsById(@PathVariable long productId) {
+    //findRequestById
+    @GetMapping(value = "/{requestId}")
+    public ResponseEntity<Optional<Jielong>> getAllProductsById(@PathVariable long requestId) {
 
         try {
-            Optional<Product> resultBody = productService.findProductById(productId);
+            Optional<Jielong> resultBody = jielongService.findRequestById(requestId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
