@@ -27,7 +27,7 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping(value = "")
+    @DeleteMapping(value = "/{productId}")
     public ResponseEntity<String> removeProductById(@PathVariable long productId) {
 
         try {
