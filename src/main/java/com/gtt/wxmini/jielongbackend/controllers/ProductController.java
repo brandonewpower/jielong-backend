@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -17,7 +16,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    //addProduct
     @PostMapping(value = "")
     public ResponseEntity<String> addProduct(@RequestBody Product product) {
 
@@ -29,7 +27,6 @@ public class ProductController {
         }
     }
 
-    //removeProductById
     @DeleteMapping(value = "")
     public ResponseEntity<String> removeProductById(@PathVariable long productId) {
 
@@ -41,12 +38,11 @@ public class ProductController {
         }
     }
 
-    //findProductById
     @GetMapping(value = "/{productId}")
-    public ResponseEntity<Optional<Product>> getAllProductsById(@PathVariable long productId) {
+    public ResponseEntity<Product> getProductById(@PathVariable long productId) {
 
         try {
-            Optional<Product> resultBody = productService.findProductById(productId);
+            Product resultBody = productService.findProductById(productId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

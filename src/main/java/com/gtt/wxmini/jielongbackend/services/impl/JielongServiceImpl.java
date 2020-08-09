@@ -24,7 +24,12 @@ public class JielongServiceImpl implements JielongService {
         jielongRepository.save(jielong);
     }
 
-    //findAll
+    @Override
+    public void updateRequest(long id) throws ExecutionException, InterruptedException {
+
+        jielongRepository.save(this.findRequestById(id));
+    }
+
     public Iterable<Jielong> findAllRequest() {
 
         return jielongRepository.findAll();

@@ -43,7 +43,7 @@ public class JielongController {
 
     //findRequestById
     @GetMapping(value = "/{requestId}")
-    public ResponseEntity<Optional<Jielong>> getAllProductsById(@PathVariable long requestId) {
+    public ResponseEntity<Optional<Jielong>> getAllRequestById(@PathVariable long requestId) {
 
         try {
             Optional<Jielong> resultBody = jielongService.findRequestById(requestId);
