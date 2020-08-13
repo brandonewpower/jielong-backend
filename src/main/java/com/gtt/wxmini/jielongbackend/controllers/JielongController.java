@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -17,7 +16,6 @@ public class JielongController {
     @Autowired
     private JielongService jielongService;
 
-    //addRequest
     @PostMapping(value = "")
     public ResponseEntity<String> addRequest(@RequestBody Jielong jielong) {
 
@@ -29,8 +27,7 @@ public class JielongController {
         }
     }
 
-    //removeRequestById
-    @DeleteMapping(value = "")
+    @DeleteMapping(value = "/{requestId}")
     public ResponseEntity<String> removeRequestById(@PathVariable long requestId) {
 
         try {
@@ -41,12 +38,33 @@ public class JielongController {
         }
     }
 
-    //findRequestById
     @GetMapping(value = "/{requestId}")
-    public ResponseEntity<Optional<Jielong>> getAllProductsById(@PathVariable long requestId) {
+    public ResponseEntity<Jielong> getRequestsById(@PathVariable long requestId) {
 
         try {
-            Optional<Jielong> resultBody = jielongService.findRequestById(requestId);
+            Jielong resultBody = jielongService.findRequestById(requestId);
+            return new ResponseEntity<>(resultBody, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping(value = "")
+    public ResponseEntity<String> updateRequest(@RequestBody Jielong jielong) {
+
+        try {
+            jielongService.updateRequest(jielong);
+            return new ResponseEntity<>("Request updated successfully.", HttpStatus.CREATED);
+        } catch (InterruptedException | ExecutionException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "")
+    public ResponseEntity<Iterable<Jielong>> getAllRequests() {
+
+        try {
+            Iterable<Jielong> resultBody = jielongService.findAllRequest();
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

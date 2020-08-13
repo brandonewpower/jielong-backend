@@ -6,8 +6,6 @@ import com.gtt.wxmini.jielongbackend.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -23,9 +21,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Optional<Product> findProductById(long productId) {
+    public Product findProductById(long productId) {
 
-        return productRepository.findById(productId);
+        return productRepository.findById(productId).get();
     }
 
     @Override
