@@ -20,6 +20,9 @@ public class Jielong {
     private int orderQuantity;
     private double orderPrice;
     private ServiceMethod serviceMethod;
+    //
+    private String address;
+    private Date serviceTime;
     private boolean needGuestName;
     private boolean needGuestPhone;
 
