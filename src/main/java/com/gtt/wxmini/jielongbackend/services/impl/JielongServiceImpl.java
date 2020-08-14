@@ -20,6 +20,7 @@ public class JielongServiceImpl implements JielongService {
         jielongRepository.save(jielong);
     }
 
+    @Override
     public Iterable<Jielong> findAllRequest() {
 
         return jielongRepository.findAll();
