@@ -17,32 +17,32 @@ public class JielongController {
     private JielongService jielongService;
 
     @PostMapping(value = "")
-    public ResponseEntity<String> addRequest(@RequestBody Jielong jielong) {
+    public ResponseEntity<String> addJielong(@RequestBody Jielong jielong) {
 
         try {
-            jielongService.addRequest(jielong);
-            return new ResponseEntity<>("Request added successfully.", HttpStatus.CREATED);
+            jielongService.addJielong(jielong);
+            return new ResponseEntity<>("Jielong added successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @DeleteMapping(value = "/{requestId}")
-    public ResponseEntity<String> removeRequestById(@PathVariable long requestId) {
+    @DeleteMapping(value = "/{JielongId}")
+    public ResponseEntity<String> removeJielongById(@PathVariable long JielongId) {
 
         try {
-            jielongService.removeRequestById(requestId);
+            jielongService.removeJielongById(JielongId);
             return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping(value = "/{requestId}")
-    public ResponseEntity<Jielong> getRequestsById(@PathVariable long requestId) {
+    @GetMapping(value = "/{JielongId}")
+    public ResponseEntity<Jielong> getJielongsById(@PathVariable long JielongId) {
 
         try {
-            Jielong resultBody = jielongService.findRequestById(requestId);
+            Jielong resultBody = jielongService.findJielongById(JielongId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -50,21 +50,21 @@ public class JielongController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<String> updateRequest(@RequestBody Jielong jielong) {
+    public ResponseEntity<String> updateJielong(@RequestBody Jielong jielong) {
 
         try {
-            jielongService.updateRequest(jielong);
-            return new ResponseEntity<>("Request updated successfully.", HttpStatus.CREATED);
+            jielongService.updateJielong(jielong);
+            return new ResponseEntity<>("Jielong updated successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<Iterable<Jielong>> getAllRequests() {
+    public ResponseEntity<Iterable<Jielong>> getAllJielongs() {
 
         try {
-            Iterable<Jielong> resultBody = jielongService.findAllRequest();
+            Iterable<Jielong> resultBody = jielongService.findAllJielong();
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

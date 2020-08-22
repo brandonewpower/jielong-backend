@@ -15,31 +15,31 @@ public class JielongServiceImpl implements JielongService {
     private JielongRepository jielongRepository;
 
     @Override
-    public void addRequest(Jielong jielong) throws ExecutionException, InterruptedException {
+    public void addJielong(Jielong jielong) throws ExecutionException, InterruptedException {
 
         jielongRepository.save(jielong);
     }
 
     @Override
-    public Iterable<Jielong> findAllRequest() {
+    public Iterable<Jielong> findAllJielong() {
 
         return jielongRepository.findAll();
     }
 
     @Override
-    public Jielong findRequestById(long jielongId) {
+    public Jielong findJielongById(long jielongId) {
 
         return jielongRepository.findById(jielongId).get();
     }
 
     @Override
-    public void removeRequestById(long id) throws ExecutionException, InterruptedException {
+    public void removeJielongById(long id) throws ExecutionException, InterruptedException {
 
         jielongRepository.deleteById(id);
     }
 
     @Override
-    public void updateRequest(Jielong jielong) throws ExecutionException, InterruptedException {
+    public void updateJielong(Jielong jielong) throws ExecutionException, InterruptedException {
 
         jielongRepository.save(jielong);
     }

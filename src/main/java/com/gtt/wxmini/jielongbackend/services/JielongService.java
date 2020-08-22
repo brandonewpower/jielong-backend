@@ -5,10 +5,10 @@ import java.util.concurrent.ExecutionException;
 
 public interface JielongService {
 
-    void addRequest(Jielong jielong) throws ExecutionException, InterruptedException;
-    Iterable<Jielong> findAllRequest();
-    Jielong findRequestById(long jielongId);
-    void removeRequestById(long id) throws ExecutionException, InterruptedException;
-    void updateRequest(Jielong jielong) throws ExecutionException, InterruptedException;
+    void addJielong(Jielong jielong) throws ExecutionException, InterruptedException;
+    Iterable<Jielong> findAllJielong();
+    Jielong findJielongById(long jielongId);
+    void removeJielongById(long id) throws ExecutionException, InterruptedException;
+    void updateJielong(Jielong jielong) throws ExecutionException, InterruptedException;
 
 }
