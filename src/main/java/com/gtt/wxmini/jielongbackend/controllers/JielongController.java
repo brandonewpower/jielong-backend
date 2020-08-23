@@ -32,7 +32,7 @@ public class JielongController {
 
         try {
             jielongService.removeJielongById(JielongId);
-            return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("Jielong deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

@@ -10,18 +10,14 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "jielong_table")
-public class Jielong {
+@Table(name = "delivery_table")
+public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long deliveryId;
     private long jielongId;
-    private Date statementTime;
-    private int orderQuantity;
-    private double orderPrice;
+    private ServiceMethod serviceMethod;
     private String address;
-    private Date serviceTime;
-    private boolean needGuestName;
-    private boolean needGuestPhone;
-
+    private Date date;
 }
