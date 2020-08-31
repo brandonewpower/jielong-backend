@@ -2,23 +2,23 @@ package com.gtt.wxmini.jielongbackend.models;
 
 import lombok.*;
 
+
 import javax.persistence.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "product_table")
-public class Product {
+@Table(name = "user_table")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long UUID;
+    private long userId;
     private long jielongId;
-    private String productName;
-    private String imageUrl;
-    private String description;
-    private double productPrice;
-    private int maxNumber;
+    private int orderNumber;
+    private String feedback;
+    private String status;
 }
