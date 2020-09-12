@@ -1,12 +1,14 @@
 package com.gtt.wxmini.jielongbackend.controllers;
 
 import com.gtt.wxmini.jielongbackend.models.Jielong;
+import com.gtt.wxmini.jielongbackend.models.JielongObject;
 import com.gtt.wxmini.jielongbackend.services.JielongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -39,10 +41,10 @@ public class JielongController {
     }
 
     @GetMapping(value = "/{JielongId}")
-    public ResponseEntity<Jielong> getJielongsById(@PathVariable long JielongId) {
+    public ResponseEntity<JielongObject> getJielongsById(@PathVariable long JielongId) {
 
         try {
-            Jielong resultBody = jielongService.findJielongById(JielongId);
+            JielongObject resultBody = jielongService.findJielongById(JielongId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -61,10 +63,10 @@ public class JielongController {
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<Iterable<Jielong>> getAllJielongs() {
+    public ResponseEntity<List<JielongObject>> getAllJielongs() {
 
         try {
-            Iterable<Jielong> resultBody = jielongService.findAllJielong();
+            List<JielongObject> resultBody = jielongService.findAllJielong();
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

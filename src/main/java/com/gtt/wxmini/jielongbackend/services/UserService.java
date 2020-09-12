@@ -8,9 +8,8 @@ import java.util.concurrent.ExecutionException;
 public interface UserService {
 
     void addUser(User user) throws ExecutionException, InterruptedException;
-    User findUserById(long Id);
     User findUserByUserId(long userId);
-    User findUserByJielongId(long jielongId);
+    List<User> findAllUserByJielongId(long jielongId);
     void removeUserById(long userId) throws ExecutionException, InterruptedException;
-    void update(User user) throws ExecutionException, InterruptedException;
+    void updateUser(User user) throws ExecutionException, InterruptedException;
 }

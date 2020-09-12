@@ -4,9 +4,11 @@ import com.gtt.wxmini.jielongbackend.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByUserId(long userId);
-    User findByJielongId(long jielongId);
+    List<User> findAllByJielongId(long jielongId);
 }

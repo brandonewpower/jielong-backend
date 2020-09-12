@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -27,17 +28,6 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/{Id}")
-    public ResponseEntity<User> getUserById(@PathVariable long Id) {
-
-        try {
-            User resultBody = userService.findUserById(Id);
-            return new ResponseEntity<>(resultBody, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
-
     @GetMapping(value = "/{userId}")
     public ResponseEntity<User> getUserByUserId(@PathVariable long userId) {
 
@@ -50,21 +40,21 @@ public class UserController {
     }
 
     @GetMapping(value = "/{jielongId}")
-    public ResponseEntity<User> getUserByJielongId(@PathVariable long jielongId) {
+    public ResponseEntity<List<User>> getUserByJielongId(@PathVariable long jielongId) {
 
         try {
-            User resultBody = userService.findUserByJielongId(jielongId);
+            List<User> resultBody = userService.findAllUserByJielongId(jielongId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping(value = "/{Id}")
-    public ResponseEntity<String> removeUserById(@PathVariable long Id) {
+    @DeleteMapping(value = "/{userId}")
+    public ResponseEntity<String> removeUserById(@PathVariable long userId) {
 
         try {
-            userService.removeUserById(Id);
+            userService.removeUserById(userId);
             return new ResponseEntity<>("User deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -75,7 +65,7 @@ public class UserController {
     public ResponseEntity<String> updateUser(@RequestBody User user) {
 
         try {
-            userService.addUser(user);
+            userService.updateUser(user);
             return new ResponseEntity<>("User updated successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

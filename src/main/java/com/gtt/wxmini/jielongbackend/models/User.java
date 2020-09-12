@@ -15,7 +15,6 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long UUID;
     private long userId;
     private long jielongId;
     private int orderNumber;

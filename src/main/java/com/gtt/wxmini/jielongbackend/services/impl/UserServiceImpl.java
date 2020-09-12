@@ -6,6 +6,7 @@ import com.gtt.wxmini.jielongbackend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -21,21 +22,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(long Id) {
-
-        return userRepository.findById(Id).get();
-    }
-
-    @Override
     public User findUserByUserId(long userId) {
 
         return userRepository.findByUserId(userId);
     }
 
     @Override
-    public User findUserByJielongId(long jielongId) {
+    public List<User> findAllUserByJielongId(long jielongId) {
 
-        return userRepository.findByJielongId(jielongId);
+        return userRepository.findAllByJielongId(jielongId);
     }
 
     @Override
@@ -45,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user) throws ExecutionException, InterruptedException {
+    public void updateUser(User user) throws ExecutionException, InterruptedException {
 
         userRepository.save(user);
     }
