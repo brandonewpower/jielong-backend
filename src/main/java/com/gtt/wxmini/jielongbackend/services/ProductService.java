@@ -9,6 +9,7 @@ public interface ProductService {
 
     void addProduct(Product product) throws ExecutionException, InterruptedException;
     Product findProductById(long productId);
+    void updateProduct(Product product) throws ExecutionException, InterruptedException;
     void removeProductById(long id) throws ExecutionException, InterruptedException;
     List<Product> findAllProductByJielongId(long jielongId);
 

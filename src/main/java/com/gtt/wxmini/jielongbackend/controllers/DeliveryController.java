@@ -40,7 +40,7 @@ public class DeliveryController {
         }
     }
 
-    @PostMapping(value = "")
+    @PutMapping(value = "")
     public ResponseEntity<String> updateDelivery(@RequestBody Delivery Delivery) {
 
         try {
@@ -51,22 +51,22 @@ public class DeliveryController {
         }
     }
 
-    @DeleteMapping(value = "/{Id}")
-    public ResponseEntity<String> removeDeliveryById(@PathVariable long Id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> removeDeliveryById(@PathVariable long id) {
 
         try {
-            deliveryService.removeDeliveryById(Id);
+            deliveryService.removeDeliveryById(id);
             return new ResponseEntity<>("Delivery deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping(value = "/{JielongId}")
-    public ResponseEntity<List<Delivery>> getAllDeliverysByJielongId(@PathVariable long JielongId) {
+    @GetMapping(value = "/{jielongId}")
+    public ResponseEntity<List<Delivery>> getAllDeliverysByJielongId(@PathVariable long jielongId) {
 
         try {
-            List<Delivery> resultBody = deliveryService.findAllDeliveryByJielongId(JielongId);
+            List<Delivery> resultBody = deliveryService.findAllDeliveryByJielongId(jielongId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

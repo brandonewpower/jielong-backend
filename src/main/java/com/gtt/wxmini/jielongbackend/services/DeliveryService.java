@@ -7,9 +7,9 @@ import java.util.concurrent.ExecutionException;
 
 public interface DeliveryService {
 
-    void addDelivery(Delivery Delivery) throws ExecutionException, InterruptedException;
+    void addDelivery(Delivery delivery) throws ExecutionException, InterruptedException;
     Delivery findDeliveryByDeliveryId(long id);
-    void updateDelivery(Delivery Delivery) throws ExecutionException, InterruptedException;
+    void updateDelivery(Delivery delivery) throws ExecutionException, InterruptedException;
     void removeDeliveryById(long id) throws ExecutionException, InterruptedException;
     List<Delivery> findAllDeliveryByJielongId(long id);
 }

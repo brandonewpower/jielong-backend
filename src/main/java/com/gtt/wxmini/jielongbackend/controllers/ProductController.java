@@ -39,6 +39,17 @@ public class ProductController {
         }
     }
 
+    @PutMapping(value = "")
+    public ResponseEntity<String> updateProduct(@RequestBody Product product) {
+
+        try {
+            productService.updateProduct(product);
+            return new ResponseEntity<>("Product updated successfully.", HttpStatus.CREATED);
+        } catch (InterruptedException | ExecutionException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping(value = "/{productId}")
     public ResponseEntity<Product> getProductById(@PathVariable long productId) {
 

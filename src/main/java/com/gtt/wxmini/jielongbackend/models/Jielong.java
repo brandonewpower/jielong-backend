@@ -19,8 +19,6 @@ public class Jielong {
     private Date statementTime;
     private int orderQuantity;
     private double orderPrice;
-    private String address;
-    private Date serviceTime;
     private boolean needGuestName;
     private boolean needGuestPhone;
 

@@ -19,43 +19,43 @@ public class JielongController {
     private JielongService jielongService;
 
     @PostMapping(value = "")
-    public ResponseEntity<String> addJielong(@RequestBody Jielong jielong) {
+    public ResponseEntity<String> addJielong(@RequestBody JielongObject jielongObject) {
 
         try {
-            jielongService.addJielong(jielong);
+            jielongService.addJielong(jielongObject);
             return new ResponseEntity<>("Jielong added successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @DeleteMapping(value = "/{JielongId}")
-    public ResponseEntity<String> removeJielongById(@PathVariable long JielongId) {
+    @DeleteMapping(value = "/{jielongId}")
+    public ResponseEntity<String> removeJielongById(@PathVariable long jielongId) {
 
         try {
-            jielongService.removeJielongById(JielongId);
+            jielongService.removeJielongById(jielongId);
             return new ResponseEntity<>("Jielong deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping(value = "/{JielongId}")
-    public ResponseEntity<JielongObject> getJielongsById(@PathVariable long JielongId) {
+    @GetMapping(value = "/{jielongId}")
+    public ResponseEntity<JielongObject> getJielongsById(@PathVariable long jielongId) {
 
         try {
-            JielongObject resultBody = jielongService.findJielongById(JielongId);
+            JielongObject resultBody = jielongService.findJielongById(jielongId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
-    @PostMapping(value = "")
-    public ResponseEntity<String> updateJielong(@RequestBody Jielong jielong) {
+    @PutMapping(value = "")
+    public ResponseEntity<String> updateJielong(@RequestBody JielongObject jielongObject) {
 
         try {
-            jielongService.updateJielong(jielong);
+            jielongService.updateJielong(jielongObject);
             return new ResponseEntity<>("Jielong updated successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

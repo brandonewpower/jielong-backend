@@ -28,6 +28,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void updateProduct(Product product) throws ExecutionException, InterruptedException {
+
+        productRepository.save(product);
+    }
+
+    @Override
     public void removeProductById(long id) throws ExecutionException, InterruptedException {
 
         productRepository.deleteById(id);
@@ -35,6 +41,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAllProductByJielongId(long jielongId) {
+
         return productRepository.findAllByJielongId(jielongId);
     }
 

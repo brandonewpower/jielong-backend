@@ -61,7 +61,7 @@ public class UserController {
         }
     }
 
-    @PostMapping(value = "")
+    @PutMapping(value = "")
     public ResponseEntity<String> updateUser(@RequestBody User user) {
 
         try {
