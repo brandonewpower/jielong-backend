@@ -1,0 +1,37 @@
+version: '3'
+services:
+  jielong-web:
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://jielong-postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin123
+    networks:
+      - jielong-network
+    depends_on:
+      - jielong-postgres
+      - jielong-pgadmin
+  jielong-postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    networks:
+      - jielong-network
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+  jielong-pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 5050:80
+    networks:
+      - jielong-network
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_PASSWORD: admin123
+
+networks:
+  jielong-network:
+    driver: bridge

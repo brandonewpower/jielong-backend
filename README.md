@@ -2,12 +2,24 @@
 
 ## Commands
 
-### Build SpringBoot App
-```
-mvn clean install
+### Run SpringBoot App
+```shell script
+mvn spring-boot:run
 ```
 
-### Run SpringBoot App
+### Docker Launch
+
+#### Build App Jar
+```shell script
+mvn clean install -DskipTests
 ```
-mvn spring-boot:run
+
+#### Start Cluster
+```shell script
+docker-compose up --build
+```
+
+#### Remove Cluster
+```shell script
+docker-compose down --volumes --rmi 'all' 
 ```
