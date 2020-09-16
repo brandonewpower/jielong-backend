@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping(value = "")
+@RequestMapping(value = "/api/delivery")
 public class DeliveryController {
 
     @Autowired
