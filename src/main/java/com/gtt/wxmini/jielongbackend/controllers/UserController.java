@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = "/api/users")
 public class UserController {
 
     @Autowired
@@ -39,14 +39,14 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/{jielongId}")
-    public ResponseEntity<List<User>> getUserByJielongId(@PathVariable long jielongId) {
+    @PutMapping(value = "")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
 
         try {
-            List<User> resultBody = userService.findAllUserByJielongId(jielongId);
-            return new ResponseEntity<>(resultBody, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            userService.updateUser(user);
+            return new ResponseEntity<>("User updated successfully.", HttpStatus.CREATED);
+        } catch (InterruptedException | ExecutionException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -56,17 +56,6 @@ public class UserController {
         try {
             userService.removeUserById(userId);
             return new ResponseEntity<>("User deleted successfully.", HttpStatus.ACCEPTED);
-        } catch (InterruptedException | ExecutionException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @PutMapping(value = "")
-    public ResponseEntity<String> updateUser(@RequestBody User user) {
-
-        try {
-            userService.updateUser(user);
-            return new ResponseEntity<>("User updated successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

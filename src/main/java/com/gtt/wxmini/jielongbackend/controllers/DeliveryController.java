@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping(value = "/api/delivery")
+@RequestMapping(value = "/api/deliveries")
 public class DeliveryController {
 
     @Autowired
@@ -51,25 +51,14 @@ public class DeliveryController {
         }
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> removeDeliveryById(@PathVariable long id) {
+    @DeleteMapping(value = "/{deliveryId}")
+    public ResponseEntity<String> removeDeliveryById(@PathVariable long deliveryId) {
 
         try {
-            deliveryService.removeDeliveryById(id);
+            deliveryService.removeDeliveryById(deliveryId);
             return new ResponseEntity<>("Delivery deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @GetMapping(value = "/{jielongId}")
-    public ResponseEntity<List<Delivery>> getAllDeliverysByJielongId(@PathVariable long jielongId) {
-
-        try {
-            List<Delivery> resultBody = deliveryService.findAllDeliveryByJielongId(jielongId);
-            return new ResponseEntity<>(resultBody, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 }

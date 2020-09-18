@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping(value = "/api/jielong")
+@RequestMapping(value = "/api/jielongs")
 public class JielongController {
 
     @Autowired
@@ -29,14 +29,14 @@ public class JielongController {
         }
     }
 
-    @DeleteMapping(value = "/{jielongId}")
-    public ResponseEntity<String> removeJielongById(@PathVariable long jielongId) {
+    @GetMapping(value = "")
+    public ResponseEntity<List<JielongObject>> getAllJielongs() {
 
         try {
-            jielongService.removeJielongById(jielongId);
-            return new ResponseEntity<>("Jielong deleted successfully.", HttpStatus.ACCEPTED);
-        } catch (InterruptedException | ExecutionException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            List<JielongObject> resultBody = jielongService.findAllJielong();
+            return new ResponseEntity<>(resultBody, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -62,14 +62,14 @@ public class JielongController {
         }
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<List<JielongObject>> getAllJielongs() {
+    @DeleteMapping(value = "/{jielongId}")
+    public ResponseEntity<String> removeJielongById(@PathVariable long jielongId) {
 
         try {
-            List<JielongObject> resultBody = jielongService.findAllJielong();
-            return new ResponseEntity<>(resultBody, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            jielongService.removeJielongById(jielongId);
+            return new ResponseEntity<>("Jielong deleted successfully.", HttpStatus.ACCEPTED);
+        } catch (InterruptedException | ExecutionException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

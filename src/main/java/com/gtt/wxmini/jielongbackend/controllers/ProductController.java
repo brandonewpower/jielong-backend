@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping(value = "/api/product")
+@RequestMapping(value = "/api/products")
 public class ProductController {
 
     @Autowired
@@ -28,14 +28,14 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping(value = "/{productId}")
-    public ResponseEntity<String> removeProductById(@PathVariable long productId) {
+    @GetMapping(value = "/{productId}")
+    public ResponseEntity<Product> getProductById(@PathVariable long productId) {
 
         try {
-            productService.removeProductById(productId);
-            return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
-        } catch (InterruptedException | ExecutionException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            Product resultBody = productService.findProductById(productId);
+            return new ResponseEntity<>(resultBody, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -50,25 +50,14 @@ public class ProductController {
         }
     }
 
-    @GetMapping(value = "/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable long productId) {
+    @DeleteMapping(value = "/{productId}")
+    public ResponseEntity<String> removeProductById(@PathVariable long productId) {
 
         try {
-            Product resultBody = productService.findProductById(productId);
-            return new ResponseEntity<>(resultBody, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping(value = "/{jielongId}")
-    public ResponseEntity<List<Product>> getAllProductByJielongId(@PathVariable long jielongId) {
-
-        try {
-            List<Product> resultBody = productService.findAllProductByJielongId(jielongId);
-            return new ResponseEntity<>(resultBody, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            productService.removeProductById(productId);
+            return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
+        } catch (InterruptedException | ExecutionException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }
