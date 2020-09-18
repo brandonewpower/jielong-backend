@@ -1,7 +1,6 @@
 package com.gtt.wxmini.jielongbackend.services.impl;
 
 import com.gtt.wxmini.jielongbackend.models.*;
-import com.gtt.wxmini.jielongbackend.repositories.JielongObjectRepository;
 import com.gtt.wxmini.jielongbackend.repositories.JielongRepository;
 import com.gtt.wxmini.jielongbackend.services.DeliveryService;
 import com.gtt.wxmini.jielongbackend.services.JielongService;
@@ -28,9 +27,6 @@ public class JielongServiceImpl implements JielongService {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private JielongObjectRepository jielongObjectRepository;
 
     @Override
     public void addJielong(JielongObject jielongObject) throws ExecutionException, InterruptedException {
@@ -97,8 +93,7 @@ public class JielongServiceImpl implements JielongService {
     @Override
     public void removeJielongById(long id) throws ExecutionException, InterruptedException {
 
-        JielongObject jielongObject = jielongObjectRepository.findById(id).get();
-
+        JielongObject jielongObject = findJielongById(id);
         List<Product> productList = jielongObject.getProductList();
         for(Product product : productList) {
             productService.removeProductById(product.getProductId());
@@ -114,7 +109,6 @@ public class JielongServiceImpl implements JielongService {
             userService.removeUserById(user.getUserId());
         }
 
-        jielongObjectRepository.deleteById(id);
         jielongRepository.deleteById(id);
     }
 
@@ -127,7 +121,7 @@ public class JielongServiceImpl implements JielongService {
         jielongRepository.save(jielong);
     }
 
-    void setupJielong(Jielong jielong, JielongObject jielongObject) {
+    private void setupJielong(Jielong jielong, JielongObject jielongObject) {
 
         jielong.setJielongId(jielongObject.getJielongId());
         jielong.setStatementTime(jielongObject.getStatementTime());
