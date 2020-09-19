@@ -1,25 +1,24 @@
 package com.gtt.wxmini.jielongbackend.models;
 
-import lombok.*;
-
-import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "jielong_table")
-public class Jielong {
+public class JielongObject {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long jielongId;
     private Date statementTime;
     private int orderQuantity;
     private double orderPrice;
     private boolean needGuestName;
     private boolean needGuestPhone;
+
+    private List<Product> productList;
+    private List<Delivery> deliveryList;
+    private List<User> userList;
 
 }

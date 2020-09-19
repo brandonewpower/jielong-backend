@@ -1,7 +1,7 @@
 package com.gtt.wxmini.jielongbackend.controllers;
 
-import com.gtt.wxmini.jielongbackend.models.Product;
-import com.gtt.wxmini.jielongbackend.services.ProductService;
+import com.gtt.wxmini.jielongbackend.models.User;
+import com.gtt.wxmini.jielongbackend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,28 +11,28 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping(value = "/api/products")
-public class ProductController {
+@RequestMapping(value = "/api/users")
+public class UserController {
 
     @Autowired
-    private ProductService productService;
+    private UserService userService;
 
     @PostMapping(value = "")
-    public ResponseEntity<String> addProduct(@RequestBody Product product) {
+    public ResponseEntity<String> addUser(@RequestBody User user) {
 
         try {
-            productService.addProduct(product);
-            return new ResponseEntity<>("Product added successfully.", HttpStatus.CREATED);
+            userService.addUser(user);
+            return new ResponseEntity<>("User added successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping(value = "/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable long productId) {
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<User> getUserByUserId(@PathVariable long userId) {
 
         try {
-            Product resultBody = productService.findProductById(productId);
+            User resultBody = userService.findUserByUserId(userId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -40,22 +40,22 @@ public class ProductController {
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<String> updateProduct(@RequestBody Product product) {
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
 
         try {
-            productService.updateProduct(product);
-            return new ResponseEntity<>("Product updated successfully.", HttpStatus.CREATED);
+            userService.updateUser(user);
+            return new ResponseEntity<>("User updated successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @DeleteMapping(value = "/{productId}")
-    public ResponseEntity<String> removeProductById(@PathVariable long productId) {
+    @DeleteMapping(value = "/{userId}")
+    public ResponseEntity<String> removeUserById(@PathVariable long userId) {
 
         try {
-            productService.removeProductById(productId);
-            return new ResponseEntity<>("Product deleted successfully.", HttpStatus.ACCEPTED);
+            userService.removeUserById(userId);
+            return new ResponseEntity<>("User deleted successfully.", HttpStatus.ACCEPTED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

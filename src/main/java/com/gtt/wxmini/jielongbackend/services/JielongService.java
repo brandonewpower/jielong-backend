@@ -1,18 +1,19 @@
 package com.gtt.wxmini.jielongbackend.services;
 
 import com.gtt.wxmini.jielongbackend.models.Jielong;
-import com.gtt.wxmini.jielongbackend.models.Product;
+import com.gtt.wxmini.jielongbackend.models.JielongObject;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface JielongService {
 
-    public void addRequest(Jielong jielong) throws ExecutionException, InterruptedException;
-    public void updateRequest(long id) throws ExecutionException, InterruptedException;
-    public Optional<Jielong> findRequestById(long jielongId) throws ExecutionException, InterruptedException;
-    public void removeRequestById(long id) throws ExecutionException, InterruptedException;
+    void addJielong(JielongObject jielongObject) throws ExecutionException, InterruptedException;
+    List<JielongObject> findAllJielong();
+    JielongObject findJielongById(long jielongId);
+    void removeJielongById(long id) throws ExecutionException, InterruptedException;
+    void updateJielong(JielongObject jielongObject) throws ExecutionException, InterruptedException;
 
-    //optional findAll, updateRequest, removeAll, addFavourite
+
 
 }

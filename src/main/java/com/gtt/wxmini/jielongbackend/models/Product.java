@@ -14,7 +14,8 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long UUID;
+    private long productId;
+    private long jielongId;
     private String productName;
     private String imageUrl;
     private String description;
