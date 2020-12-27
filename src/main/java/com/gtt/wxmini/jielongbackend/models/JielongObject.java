@@ -16,6 +16,7 @@ public class JielongObject {
     private double orderPrice;
     private boolean needGuestName;
     private boolean needGuestPhone;
+    private String description;
 
     private List<Product> productList;
     private List<Delivery> deliveryList;

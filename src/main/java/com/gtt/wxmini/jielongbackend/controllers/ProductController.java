@@ -39,6 +39,17 @@ public class ProductController {
         }
     }
 
+    @GetMapping(value = "/jielong/{jielongId}")
+    public ResponseEntity<List<Product>> getAllProductByJielongId(@PathVariable long jielongId) {
+
+        try {
+            List<Product> resultBody = productService.findAllProductByJielongId(jielongId);
+            return new ResponseEntity<>(resultBody, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping(value = "")
     public ResponseEntity<String> updateProduct(@RequestBody Product product) {
 

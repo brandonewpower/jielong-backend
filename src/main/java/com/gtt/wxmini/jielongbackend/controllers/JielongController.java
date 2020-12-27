@@ -1,7 +1,6 @@
 package com.gtt.wxmini.jielongbackend.controllers;
 
 import com.gtt.wxmini.jielongbackend.models.Jielong;
-import com.gtt.wxmini.jielongbackend.models.JielongObject;
 import com.gtt.wxmini.jielongbackend.services.JielongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,21 +18,21 @@ public class JielongController {
     private JielongService jielongService;
 
     @PostMapping(value = "")
-    public ResponseEntity<String> addJielong(@RequestBody JielongObject jielongObject) {
+    public ResponseEntity<Long> addJielong(@RequestBody Jielong jielong) {
 
         try {
-            jielongService.addJielong(jielongObject);
-            return new ResponseEntity<>("Jielong added successfully.", HttpStatus.CREATED);
+            long resultBody = jielongService.addJielong(jielong);
+            return new ResponseEntity<>(resultBody, HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<List<JielongObject>> getAllJielongs() {
+    public ResponseEntity<List<Jielong>> getAllJielongs() {
 
         try {
-            List<JielongObject> resultBody = jielongService.findAllJielong();
+            List<Jielong> resultBody = jielongService.findAllJielong();
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -41,10 +40,10 @@ public class JielongController {
     }
 
     @GetMapping(value = "/{jielongId}")
-    public ResponseEntity<JielongObject> getJielongsById(@PathVariable long jielongId) {
+    public ResponseEntity<Jielong> getJielongsById(@PathVariable long jielongId) {
 
         try {
-            JielongObject resultBody = jielongService.findJielongById(jielongId);
+            Jielong resultBody = jielongService.findJielongById(jielongId);
             return new ResponseEntity<>(resultBody, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -52,10 +51,10 @@ public class JielongController {
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<String> updateJielong(@RequestBody JielongObject jielongObject) {
+    public ResponseEntity<String> updateJielong(@RequestBody Jielong jielong) {
 
         try {
-            jielongService.updateJielong(jielongObject);
+            jielongService.updateJielong(jielong);
             return new ResponseEntity<>("Jielong updated successfully.", HttpStatus.CREATED);
         } catch (InterruptedException | ExecutionException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

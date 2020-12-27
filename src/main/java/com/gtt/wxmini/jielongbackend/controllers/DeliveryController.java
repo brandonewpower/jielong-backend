@@ -40,6 +40,17 @@ public class DeliveryController {
         }
     }
 
+    @GetMapping(value = "/jielong/{jielongId}")
+    public ResponseEntity<List<Delivery>> getDeliverysByJielongId(@PathVariable long jielongId) {
+
+        try {
+            List<Delivery> resultBody = deliveryService.findAllDeliveryByJielongId(jielongId);
+            return new ResponseEntity<>(resultBody, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping(value = "")
     public ResponseEntity<String> updateDelivery(@RequestBody Delivery Delivery) {
 

@@ -21,5 +21,7 @@ public class Jielong {
     private double orderPrice;
     private boolean needGuestName;
     private boolean needGuestPhone;
+    private String description;
+    private long startersUserId;
 
 }

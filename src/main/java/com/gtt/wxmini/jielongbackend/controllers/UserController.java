@@ -60,4 +60,15 @@ public class UserController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping(value = "/jielong/{jielongId}")
+    public ResponseEntity<List<User>> getUserByJielongId(@PathVariable long jielongId) {
+
+        try {
+            List<User> resultBody = userService.findAllUserByJielongId(jielongId);
+            return new ResponseEntity<>(resultBody, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
 }

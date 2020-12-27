@@ -8,11 +8,17 @@ import java.util.concurrent.ExecutionException;
 
 public interface JielongService {
 
-    void addJielong(JielongObject jielongObject) throws ExecutionException, InterruptedException;
-    List<JielongObject> findAllJielong();
-    JielongObject findJielongById(long jielongId);
+    long addJielong(Jielong jielong) throws ExecutionException, InterruptedException;
+    List<Jielong> findAllJielong();
+    Jielong findJielongById(long jielongId);
     void removeJielongById(long id) throws ExecutionException, InterruptedException;
-    void updateJielong(JielongObject jielongObject) throws ExecutionException, InterruptedException;
+    void updateJielong(Jielong jielong) throws ExecutionException, InterruptedException;
+
+//    long addJielong(JielongObject jielongObject) throws ExecutionException, InterruptedException;
+//    List<JielongObject> findAllJielong();
+//    JielongObject findJielongById(long jielongId);
+//    void removeJielongById(long id) throws ExecutionException, InterruptedException;
+//    void updateJielong(JielongObject jielongObject) throws ExecutionException, InterruptedException;
 
 
 
